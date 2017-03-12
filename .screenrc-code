@@ -1,0 +1,15 @@
+source ~/.screenrc
+
+screen -t q
+stuff "cd ~/Scripts/q"
+screen -t python
+stuff "cd ~/Scripts/python"
+screen -t C
+stuff "cd ~/Scripts/krc"
+screen -t julia
+stuff "cd ~/Scripts/julia"
+screen -t pony
+stuff "cd ~/Scripts/pony"
+
+#set hardstatus
+hardstatus alwayslastline "%{db} %= %{W} %w %? %? %="
