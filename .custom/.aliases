@@ -1,0 +1,47 @@
+# navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias .1='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+
+# ls modifications
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -AlF'
+alias lla='ls -Al'
+alias lt='ls -ltrh'
+
+alias psu='ps -fwwU $(whoami)'
+alias psp='ps -fwwp'
+alias grpe='grep'
+
+alias frm='free -m'
+alias jobs='jobs -l'
+
+# rlwrap mods
+alias pywrap='rlwrap -H /var/tmp/`whoami`.python.log'
+alias py='pywrap python'
+alias qwrap='rlwrap -H /var/tmp/`whoami`.q.log'
+
+alias qenv='env | grep ^Q'
+alias qstudio='java -jar $HOME/qstudio.jar &'
+
+# turn off screen
+alias soff='clear && sleep 1 && xset dpms force off'
+
+alias spark='/home/ian/Spark/Spark 2>/dev/null &'
+alias octave='octave -q'
+
+alias julia='/opt/julia/bin/julia -q'
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias hal='/usr/sbin/hald --daemon=yes --verbose=yes'
+
+alias nscreen='screen -RaAD nest -c ~/.screenrc-outer'
+
+alias reload='. ~/.custom/.interactive'

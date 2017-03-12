@@ -1,0 +1,80 @@
+# start kdb studio
+stud ()  
+{
+	    java -jar /home/ian/kdb\ studio/studio.jar "$@" 2> /dev/null &
+}
+
+cd ()
+{
+  local pwd="{PWD}/"; # we need a slash at the end so we can check for it
+  if [[ $1 == "-e" ]]; then
+    shift
+    #start from the end
+    [[ $2 ]] && builtin cd "${pwd%/$1/*}/${2:-$1}/${pwd##*/$1/}" || builtin cd $@
+    else
+    #start from the beginning
+    [[ $2 ]] && builtin cd "${pwd/\/$1///$2/}" || builtin cd "$@"
+  fi
+}
+
+unsetQEnv ()
+{
+  if [[ $1 == "all" ]]; then
+    for i in $(env | grep ^Q | awk -F= {'print $1})
+    do
+      unset $i
+    done
+  else
+    if [[ -n $QINIT_GLOBAL ]]; then
+      export QINIT=$QINIT_GLOBAL
+    fi
+
+    for i in $(env | grep ^Q | awk -F= {'print $1})
+    do
+      if [[ ! ($i == "QDEPENDS" || $i == "QINIT" || $i == "QHOME" || $i == "QBIN") ]]; then
+        unset $i
+      fi
+    done
+  fi
+}
+
+# run q with rlwrap and console size while still allowing a script to run
+qq ()
+{
+  if [[ $1 == "" ]]; then
+    qwrap q -c 18 $COLUMNS
+
+  else
+    myScript=""
+    i=0
+    args=( "$@" )
+    cnt=${#args[@]}
+
+    while [ $i -lt $cnt ]; do
+      if [[ ${args[$i]} == *.q ]]; then
+        myScript=${args[$i]}
+        unset args[$i]
+        break
+      fi
+    let i=i+1
+    done
+
+    if [[ -z $myScript ]]; then
+      qwrap q -c 18 $COLUMNS ${args[@]}
+    else
+      qwrap q $myScript -c 18 $COLUMNS ${args[@]}
+    fi
+  fi
+}
+
+qFuncs ()
+{
+  args=( "$@" )
+  cnt=${#args[@]}
+  if [[ 1 -ne $cnt ]]; then printf "qFuncs takes one argument\n"; return 1; fi
+  if [[ $1 != *.q ]]; then printf "qFuncs argument must be a qscript\n"; return 1; fi
+
+    ack ":{" $1 | ack -v "^ " | awk -F: '{print $1}'
+
+    return 0
+}
