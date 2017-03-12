@@ -1,0 +1,7 @@
+export EDITOR=vim
+export PAGER=less
+export PATH=$PATH:/opt/q/l32
+export QHOME=/opt/q
+export CDPATH=.:..:../..:~
+export LESS="-M -R -j2 -i -n -Pw'Wait for it'"
+export PATH=$PATH:/opt/julia/bin
