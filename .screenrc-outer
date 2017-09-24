@@ -2,12 +2,12 @@ source ~/.screenrc
 
 # create a new outer screen which spawns inner screen using a different .rc file
 screen -t code
-stuff "screen -RaAD code -c ~/.screenrc-code"
+stuff "screen -RaAD code -c ~/.screenrc-code\n"
 screen -t dev
-stuff "screen -RaAD dev -c ~/.screenrc-dev"
+stuff "screen -RaAD dev -c ~/.screenrc-dev\n"
 
 # modify escape sequence for outer screen, inner will use C-A
-escape ^x
+escape ^xX
 
 #set hardstatus
 hardstatus alwayslastline '%{=b}%{G}%`@%H%= %= %{C}%w %=%{G} %= %D, %m/%d %C%a'
