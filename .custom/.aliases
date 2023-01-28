@@ -43,5 +43,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias hal='/usr/sbin/hald --daemon=yes --verbose=yes'
 
 alias nscreen='screen -RaAD nest -c ~/.screenrc-outer'
+alias tmux='tmux -2'
 
 alias reload='. ~/.custom/.interactive'

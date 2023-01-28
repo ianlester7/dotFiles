@@ -1,7 +1,13 @@
 export EDITOR=vim
 export PAGER=less
-export PATH=$PATH:/opt/q/l32
-export QHOME=/opt/q
+
+export PATH=$PATH:/Users/ian/q/q4.0-64/m64:/usr/local/Frameworks/Python.framework/Versions/3.6/bin
+export QHOME=/Users/ian/q/q4.0-64
+export QLIC=$HOME/q/lic
+
 export CDPATH=.:..:../..:~
 export LESS="-M -R -j2 -i -n -Pw'Wait for it'"
 export PATH=$PATH:/opt/julia/bin
+
+export WORKON_HOME=~/Envs
+VIRTUAL_ENV_DISABLE_PROMPT=1

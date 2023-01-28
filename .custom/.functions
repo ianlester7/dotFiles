@@ -78,3 +78,36 @@ qFuncs ()
 
     return 0
 }
+
+show_virtual_env() {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    echo "($(basename $VIRTUAL_ENV))"
+  fi
+}
+
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/bin/python "$@"
+    else
+        /usr/bin/python "$@"
+    fi
+}
+
+layout_virtualenv() {
+    local venv_path="$1"
+    source ${venv_path}/bin/activate
+}
+
+layout_virtualenvwrapper() {
+    local venv_path="${WORKON_HOME}/$1"
+    layout_virtualenv $venv_path
+}
+
+upgrade_venv() {
+    for f in $(find /Users/ian/Envs/ -type d -maxdepth 1 | ag -v "bin|lib" | \awk -F '/' '{print$2}' | tail -n +2)
+    do 
+        echo $f
+        find /Users/ian/Envs/$f -type l -delete
+        python3 -m venv --upgrade $f
+    done
+}
